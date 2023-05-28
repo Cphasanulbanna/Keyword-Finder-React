@@ -2,44 +2,58 @@ import React, { useEffect, useRef, useState } from "react";
 import { SearchBox } from "../modals/SearchBox";
 
 export const Home = () => {
-    const [query, setQuery] = useState("good");
-    const [index, setIndex] = useState(0);
-    const [length, setLength] = useState("");
+    const [query, setQuery] = useState("sample");
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [totalMatch, setTotalMatch] = useState(0);
 
     const handleChange = (e) => {
         setQuery(e.target.value);
     };
 
     const prev = () => {
-        setIndex((prev) => prev - 1);
+        setCurrentIndex((prev) => (prev - 1 >= 0 ? prev - 1 : 0));
     };
 
     const next = () => {
-        setIndex((prev) => prev + 1);
+        setCurrentIndex((prev) => (prev + 1 < totalMatch ? prev + 1 : 0));
     };
 
     const bodyRef = useRef(document.body);
 
     const highlightMatchingText = () => {
+        let count = 0;
         const allTextElements = bodyRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a");
+
         allTextElements.forEach((element, i) => {
             const innerText = element.innerText;
 
-            console.log(index);
+            const highlightedLetters = innerText.replaceAll(query, () => {
+                const classname = "yellow";
 
-            const highightedLetters = innerText.replace(
-                query,
-                i === index
-                    ? `<span class="red">${query}</span>`
-                    : `<span class="yellow">${query}</span>`
-            );
-            element.innerHTML = highightedLetters;
+                const el = document.createElement("span");
+
+                el.classList.add(classname);
+                if (query) {
+                    el.textContent = query;
+                }
+
+                count++;
+                return el.outerHTML;
+            });
+
+            element.innerHTML = highlightedLetters;
         });
+        setTotalMatch(count);
+
+        const firstspan = document.querySelectorAll(".yellow")[currentIndex];
+        if (firstspan) {
+            firstspan.id = "red";
+        }
     };
 
     useEffect(() => {
-        highlightMatchingText(index);
-    }, [query, index]);
+        highlightMatchingText();
+    }, [query, currentIndex]);
 
     return (
         <section className="py-[80px] relative">
@@ -49,9 +63,12 @@ export const Home = () => {
                 handleChange={handleChange}
                 prev={prev}
                 next={next}
+                totalMatch={totalMatch}
+                currentIndex={currentIndex}
             />
             <section className="wrapper">
                 <p>good sample good morning text hi hello how good sample</p>
+                <p> morning sample text hi hello how sample qa</p>
                 <h1> sample</h1>
                 <h1> sample</h1>
                 <h1> sample</h1>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SearchBox = ({ query, handleChange, prev, next }) => {
+export const SearchBox = ({ query, handleChange, prev, next, currentIndex, totalMatch }) => {
     return (
         <div className="max-w-[360px] w-[100%] absolute top-[20px] right-[15%] z-10 rounded-[5px] overflow-hidden p-[6px] bg-[gray]">
             <div className="flex items-center gap-[10px] text-[#fff]">
@@ -12,7 +12,9 @@ export const SearchBox = ({ query, handleChange, prev, next }) => {
                         onChange={handleChange}
                         value={query}
                     />
-                    <span className="inline-block h-[100%] w-[80px]">1/65</span>
+                    <span className="inline-block h-[100%] w-[80px]">
+                        {currentIndex + 1}/{totalMatch}
+                    </span>
                 </div>
 
                 <div className="right flex justify-end items-center w-[40%] px-[6px] gap-[15px]">

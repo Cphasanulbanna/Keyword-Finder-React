@@ -68,11 +68,17 @@ ul {
     }
 }
 
+.yellow {
+    background-color: rgb(229, 255, 32);
+    color: #fff;
+}
+
 .red {
     background-color: red !important;
     color: #fff;
 }
-.yellow {
-    background-color: rgb(229, 255, 32) !important;
+
+#red {
+    background-color: red !important;
     color: #fff;
 }
