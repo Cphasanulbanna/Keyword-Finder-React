@@ -17,7 +17,11 @@ export default {
             sm2: { max: "420px" },
             sm1: { max: "360px" },
         },
-        extend: {},
+        extend: {
+            boxShadow: {
+                md: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+            },
+        },
     },
     plugins: [],
 };

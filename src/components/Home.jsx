@@ -5,6 +5,7 @@ export const Home = () => {
     const [query, setQuery] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [totalMatch, setTotalMatch] = useState(0);
+    const [viewSearchBar, setViewSearchBar] = useState(false);
 
     const handleChange = (e) => {
         const value = e.target.value.toLowerCase();
@@ -57,17 +58,37 @@ export const Home = () => {
         highlightMatchingText();
     }, [query, currentIndex]);
 
+    const closeSearchBar = () => {
+        setViewSearchBar(false);
+    };
+
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            if (e.ctrlKey && e.key === "f") {
+                e.preventDefault();
+                setViewSearchBar(true);
+            }
+        };
+        window.addEventListener("keydown", handleKeyPress);
+
+        return () => window.removeEventListener("keydown", handleKeyPress);
+    }, []);
+
     return (
         <section className="py-[80px] relative">
-            <SearchBox
-                query={query}
-                setQuery={setQuery}
-                handleChange={handleChange}
-                previousText={previousText}
-                nextText={nextText}
-                totalMatch={totalMatch}
-                currentIndex={currentIndex}
-            />
+            {viewSearchBar && (
+                <SearchBox
+                    query={query}
+                    setQuery={setQuery}
+                    handleChange={handleChange}
+                    previousText={previousText}
+                    nextText={nextText}
+                    totalMatch={totalMatch}
+                    currentIndex={currentIndex}
+                    closeSearchBar={closeSearchBar}
+                />
+            )}
+
             <section className="wrapper">
                 <p>
                     World War II: A Global Conflict Shaping History World War II, spanning from 1939

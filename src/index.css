@@ -73,12 +73,7 @@ ul {
     color: #fff;
 }
 
-.red {
-    background-color: red !important;
-    color: #fff;
-}
-
 #red {
-    background-color: red !important;
+    background-color: red;
     color: #fff;
 }
