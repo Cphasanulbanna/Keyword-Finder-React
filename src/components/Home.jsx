@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+
+//components
 import { SearchBox } from "../modals/SearchBox";
 
 export const Home = () => {
+    //states
     const [query, setQuery] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [totalMatch, setTotalMatch] = useState(0);
     const [viewSearchBar, setViewSearchBar] = useState(false);
 
+    //updating query
     const handleChange = (e) => {
         const value = e.target.value.toLowerCase();
         setQuery(value);
@@ -22,34 +26,49 @@ export const Home = () => {
 
     const bodyRef = useRef(document.body);
 
+    //highlighting matched text function
     const highlightMatchingText = () => {
+        //count of matched text
         let count = 0;
         const allTextElements = bodyRef.current.querySelectorAll(
-            "h1, h2, h3, h4, h5, h6, p, a, li"
+            "h1:not(#exclude-heading), h1, h3, h4, h5, h6, p, a, li"
         );
 
         allTextElements.forEach((element) => {
+            //fetching text data of all tags
             const innerText = element.innerText;
             const regex = new RegExp(query, "gi");
 
+            console.log(element.innerHTML);
+
             const highlightedLetters = innerText.replaceAll(regex, (matchedWord) => {
                 const classname = "yellow";
-
+                //creating new span & adding style(class)
                 const span = document.createElement("span");
-
                 span.classList.add(classname);
+
                 if (matchedWord) {
                     span.textContent = matchedWord;
                 }
-
                 count++;
+                //returing new styled span with yellow color
                 return span.outerHTML;
             });
-
+            //appending new span[with yellow color]
             element.innerHTML = highlightedLetters;
         });
+
         setTotalMatch(count);
 
+        if (!query) {
+            //removing added spans if query is empty
+            const highlightedSpans = document.querySelectorAll(".yellow");
+            highlightedSpans.forEach((span) => {
+                span.outerHTML = span.textContent;
+            });
+        }
+
+        //fetching first element to highlight
         const firstspan = document.querySelectorAll(".yellow")[currentIndex];
         if (firstspan) {
             firstspan.id = "red";
@@ -57,11 +76,10 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        if (query) {
-            highlightMatchingText();
-        }
+        highlightMatchingText();
     }, [query, currentIndex]);
 
+    //close searchbar
     const closeSearchBar = () => {
         setQuery("");
         setViewSearchBar(false);
@@ -69,13 +87,16 @@ export const Home = () => {
 
     useEffect(() => {
         const handleKeyPress = (e) => {
+            //opening searchbar
             if (e.ctrlKey && e.key === "f") {
                 e.preventDefault();
                 setViewSearchBar(true);
             }
 
+            //left, right navigation using keybord
             if (viewSearchBar) {
                 if (e.key === "ArrowLeft") {
+                    console.log("hi");
                     previousText();
                 }
 
@@ -87,7 +108,7 @@ export const Home = () => {
         window.addEventListener("keydown", handleKeyPress);
 
         return () => window.removeEventListener("keydown", handleKeyPress);
-    }, []);
+    }, [query]);
 
     return (
         <section className="py-[80px] relative">
@@ -108,7 +129,10 @@ export const Home = () => {
                 <h1 className="text-[#111] text-[40px] font-bold text-center mb-[10px]">
                     Keyword Finder
                 </h1>
-                <h2 className="text-center text-[25px] font-bold mb-[15px] flex items-center justify-center">
+                <h2
+                    id="heading"
+                    className="text-center text-[25px] font-bold mb-[15px] flex items-center justify-center"
+                >
                     Press <span className="green mx-[5px]"> Ctrl + f </span> to open searchbar
                 </h2>
                 <h3 className="text-center text-[25px] title">

@@ -34,15 +34,16 @@ export const SearchBox = ({
                         value={query}
                         ref={inputRef}
                     />
-                    {query && (
-                        <span className=" h-[100%] w-[80px] flex justify-between">
+
+                    <span className=" h-[100%] w-[80px] flex justify-between">
+                        {query && (
                             <>
-                                <span> {currentIndex + 1}</span>
-                                <span>/</span>
-                                <span>{totalMatch}</span>
+                                <span className="text-[#111]"> {currentIndex + 1}</span>
+                                <span className="text-[#111]">/</span>
+                                <span className="text-[#111]">{totalMatch}</span>
                             </>
-                        </span>
-                    )}
+                        )}
+                    </span>
                 </div>
 
                 <div className="right flex justify-end items-center w-[40%] px-[6px] gap-[15px]">
