@@ -39,8 +39,6 @@ export const Home = () => {
             const innerText = element.innerText;
             const regex = new RegExp(query, "gi");
 
-            console.log(element.innerHTML);
-
             const highlightedLetters = innerText.replaceAll(regex, (matchedWord) => {
                 const classname = "yellow";
                 //creating new span & adding style(class)
@@ -96,7 +94,6 @@ export const Home = () => {
             //left, right navigation using keybord
             if (viewSearchBar) {
                 if (e.key === "ArrowLeft") {
-                    console.log("hi");
                     previousText();
                 }
 
@@ -108,7 +105,7 @@ export const Home = () => {
         window.addEventListener("keydown", handleKeyPress);
 
         return () => window.removeEventListener("keydown", handleKeyPress);
-    }, [query]);
+    }, [query, currentIndex]);
 
     return (
         <section className="py-[80px] relative">
