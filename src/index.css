@@ -56,15 +56,6 @@ ul {
     list-style: none;
 }
 
-input,
-button,
-svg {
-    cursor: pointer;
-}
-input:hover {
-    cursor: pointer;
-}
-
 /* general responsive styles */
 @media all and (max-width: 768px) {
     .wrapper {
@@ -75,4 +66,13 @@ input:hover {
     .wrapper {
         width: 90%;
     }
+}
+
+.red {
+    background-color: red !important;
+    color: #fff;
+}
+.yellow {
+    background-color: rgb(229, 255, 32) !important;
+    color: #fff;
 }
