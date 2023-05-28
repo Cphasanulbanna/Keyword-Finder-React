@@ -15,7 +15,7 @@ export const SearchBox = ({
     closeSearchBar,
 }) => {
     return (
-        <div className="max-w-[360px] w-[100%] absolute top-[20px] right-[15%] z-10 rounded-[5px]  px-[6px] py-[15px] bg-[#fff] shadow-md">
+        <div className="max-w-[360px] w-[100%] fixed top-[20px] right-[15%] z-10 rounded-[5px]  px-[6px] py-[15px] bg-[#fff] shadow-md">
             <div className="flex items-center gap-[10px] text-[#fff]">
                 <div className="left flex justify-between items-center w-[60%] px-[6px] gap-[6px]">
                     <input

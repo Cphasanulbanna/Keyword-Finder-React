@@ -68,6 +68,16 @@ export const Home = () => {
                 e.preventDefault();
                 setViewSearchBar(true);
             }
+
+            if (viewSearchBar) {
+                if (e.key === "ArrowLeft") {
+                    previousText();
+                }
+
+                if (e.key === "ArrowRight") {
+                    nextText();
+                }
+            }
         };
         window.addEventListener("keydown", handleKeyPress);
 
