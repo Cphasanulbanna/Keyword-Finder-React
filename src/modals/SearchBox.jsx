@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 //images
 import next from "../assets/images/next.png";
@@ -14,6 +14,14 @@ export const SearchBox = ({
     totalMatch,
     closeSearchBar,
 }) => {
+    const inputRef = useRef(null);
+
+    //auto focus
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
     return (
         <div className="max-w-[360px] w-[100%] fixed top-[20px] right-[15%] z-10 rounded-[5px]  px-[6px] py-[15px] bg-[#fff] shadow-md">
             <div className="flex items-center gap-[10px] text-[#fff]">
@@ -24,6 +32,7 @@ export const SearchBox = ({
                         placeholder="find word"
                         onChange={handleChange}
                         value={query}
+                        ref={inputRef}
                     />
                     {query && (
                         <span className=" h-[100%] w-[80px] flex justify-between">

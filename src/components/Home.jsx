@@ -24,7 +24,9 @@ export const Home = () => {
 
     const highlightMatchingText = () => {
         let count = 0;
-        const allTextElements = bodyRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a");
+        const allTextElements = bodyRef.current.querySelectorAll(
+            "h1, h2, h3, h4, h5, h6, p, a, li"
+        );
 
         allTextElements.forEach((element) => {
             const innerText = element.innerText;
@@ -55,10 +57,13 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        highlightMatchingText();
+        if (query) {
+            highlightMatchingText();
+        }
     }, [query, currentIndex]);
 
     const closeSearchBar = () => {
+        setQuery("");
         setViewSearchBar(false);
     };
 
@@ -100,59 +105,135 @@ export const Home = () => {
             )}
 
             <section className="wrapper">
-                <p>
-                    World War II: A Global Conflict Shaping History World War II, spanning from 1939
-                    to 1945, was a monumental event that reshaped the course of history. It was a
-                    global conflict that involved numerous nations and had far-reaching
-                    consequences. This essay aims to provide an overview of World War II, its
-                    causes, major events, and significant outcomes. Causes and Background: The seeds
-                    of World War II were sown in the aftermath of World War I. The harsh terms
-                    imposed on Germany through the Treaty of Versailles, economic hardships,
-                    political instability, and unresolved conflicts created an environment ripe for
-                    future tensions. Additionally, aggressive expansionist policies pursued by
-                    totalitarian regimes, such as Nazi Germany under Adolf Hitler, fascist Italy
-                    under Benito Mussolini, and militarist Japan, further heightened international
-                    tensions. Major Events and Turning Points: 1. German Aggression and the Invasion
-                    of Poland (1939): The war began with Germany's invasion of Poland, prompting the
-                    United Kingdom and France to declare war on Germany. 2. Blitzkrieg and the Fall
-                    of France (1940): Germany unleashed its Blitzkrieg tactics, swiftly conquering
-                    several European countries. France fell under German occupation, leading to the
-                    evacuation of British forces from Dunkirk. 3. Battle of Britain (1940): The
-                    Royal Air Force successfully defended Britain against German air attacks,
-                    preventing a German invasion and marking a significant turning point in the war.
-                    4. Operation Barbarossa (1941): Germany launched a massive invasion of the
-                    Soviet Union, aiming to secure resources and eliminate the Soviet threat.
-                    However, the harsh Russian winter and Soviet resistance led to German setbacks.
-                    5. Pearl Harbor and the Pacific Theater (1941): The Japanese attack on the
-                    American naval base at Pearl Harbor drew the United States into the war. This
-                    event marked the beginning of the Pacific theater, where Japan aimed to expand
-                    its empire. 6. Battle of Stalingrad (1942-1943): The Soviet Union's defense of
-                    Stalingrad proved to be a major turning point, as the German forces suffered a
-                    devastating defeat. This battle marked a significant shift in momentum against
-                    the Axis powers. 7. D-Day and the Allied Invasion of Normandy (1944): The
-                    largest amphibious assault in history, the Allied forces landed on the beaches
-                    of Normandy, marking the beginning of the end for Nazi Germany's control over
-                    Western Europe. 8. Atomic Bombings of Hiroshima and Nagasaki (1945): The United
-                    States dropped atomic bombs on the Japanese cities of Hiroshima and Nagasaki,
-                    leading to Japan's surrender and the end of the war in the Pacific. Significant
-                    Outcomes: 1. Millions of Lives Lost: World War II resulted in the loss of
-                    millions of lives, both military personnel and civilians, making it one of the
-                    deadliest conflicts in human history. 2. Shifting Global Power: The war led to a
-                    reconfiguration of global power dynamics. The United States and the Soviet Union
-                    emerged as superpowers, initiating the Cold War era. 3. Creation of
-                    International Organizations: The war laid the groundwork for the establishment
-                    of international organizations such as the United Nations, aimed at promoting
-                    peace and resolving conflicts. 4. Decolonization and National Movements: World
-                    War II fueled the decolonization movements in various parts of the world,
-                    leading to the end of European colonial rule and the emergence of new
-                    independent nations. 5. Holocaust and War Crimes: The Holocaust, the systematic
-                    genocide of millions of Jews and other minority groups by the Nazis, exposed the
-                    depths of human atrocities and resulted in the pursuit of justice for war
-                    crimes. Conclusion: World War II was an immense and complex conflict that
-                    reshaped the world in countless ways. Its impact on geopolitics, technology,
-                    human rights, and global cooperation cannot be overstated. By reflecting on the
-                    causes, major
-                </p>
+                <h1 className="text-[#111] text-[40px] font-bold text-center mb-[10px]">
+                    Keyword Finder
+                </h1>
+                <h2 className="text-center text-[25px] font-bold mb-[15px] flex items-center justify-center">
+                    Press <span className="green mx-[5px]"> Ctrl + f </span> to open searchbar
+                </h2>
+                <h3 className="text-center text-[25px] title">
+                    Title: World War II: A Historic Turning Point
+                </h3>
+                <p>Introduction:</p>
+                <ol className="list-decimal">
+                    <li>
+                        World War II (1939-1945) was a pivotal event in human history that shaped
+                        the course of nations and left an indelible impact on the world.
+                    </li>
+                    <li>
+                        This essay explores the key aspects and significant points of World War II,
+                        highlighting its causes, major events, and lasting consequences.
+                    </li>
+                </ol>
+
+                <p>I. The Causes of World War II:</p>
+                <ol className="list-decimal">
+                    <li>
+                        The Treaty of Versailles: The harsh terms imposed on Germany after World War
+                        I, coupled with economic instability, fueled resentment and nationalism.
+                    </li>
+                    <li>
+                        Rise of Fascism: The emergence of fascist leaders like Adolf Hitler in
+                        Germany and Benito Mussolini in Italy promoted expansionist ideologies and
+                        militarization.
+                    </li>
+                    <li>
+                        Failure of Appeasement: The policy of appeasement by the Allied powers
+                        towards aggressive actions by Hitler's Germany only emboldened his
+                        ambitions.
+                    </li>
+                </ol>
+
+                <p>II. Major Events and Turning Points:</p>
+
+                <ol className="list-decimal">
+                    <li>
+                        Invasion of Poland: Germany's invasion of Poland in 1939 marked the
+                        beginning of the war and triggered the formation of opposing alliances.
+                    </li>
+                    <li>
+                        Blitzkrieg Tactics: Germany's lightning-fast military tactics, demonstrated
+                        in the invasion of France, showcased a new form of warfare and threatened
+                        global stability.
+                    </li>
+                    <li>
+                        Battle of Britain: The relentless German air campaign against Britain tested
+                        the resilience of the British people and their determination to resist
+                    </li>
+                    <li>
+                        Pearl Harbor Attack: Japan's surprise attack on the U.S. naval base at Pearl
+                        Harbor drew the United States into the war, altering its course
+                        significantly.
+                    </li>
+                    <li>
+                        Stalingrad: The Battle of Stalingrad in 1942-1943 turned the tide against
+                        Germany and marked a crucial victory for the Soviet Union.
+                    </li>
+                    <li>
+                        D-Day Invasion: The Allied invasion of Normandy on June 6, 1944, opened a
+                        Western front against Germany and paved the way for the liberation of
+                        Europe.
+                    </li>
+                    <li>
+                        Atomic Bombings: The atomic bombings of Hiroshima and Nagasaki by the United
+                        States brought about Japan's surrender and forever changed the nature of
+                        warfare.
+                    </li>
+                </ol>
+
+                <p>III. Impact and Legacy:</p>
+                <ol className="list-decimal">
+                    <li>
+                        Human Losses: The war resulted in the loss of millions of lives, both
+                        military personnel and civilians, leaving a profound humanitarian tragedy.
+                    </li>
+                    <li>
+                        Holocaust: The systematic persecution and genocide of six million Jews by
+                        the Nazis highlighted the depths of human cruelty and the need for justice
+                        and remembrance.
+                    </li>
+                    <li>
+                        The United Nations: The formation of the United Nations in 1945 aimed to
+                        foster international cooperation and prevent future global conflicts.
+                    </li>
+                    <li>
+                        Cold War: The tensions between the Soviet Union and the United States,
+                        arising from differing ideologies, emerged as a defining feature of the
+                        post-war era.
+                    </li>
+                    <li>
+                        Technological Advancements: World War II spurred significant advancements in
+                        technology, including radar, jet engines, and nuclear power, with lasting
+                        impacts on various fields.
+                    </li>
+                    <li>
+                        Decolonization: The war contributed to the dismantling of colonial empires
+                        and the rise of independence movements across the globe.
+                    </li>
+                    <li>
+                        Lessons Learned: World War II serves as a reminder of the devastating
+                        consequences of war and the importance of diplomacy, peacekeeping, and
+                        international collaboration.s
+                    </li>
+                </ol>
+
+                <p>Conclusion:</p>
+                <ol className="list-decimal">
+                    <li>
+                        World War II stands as a transformative period in history, where nations
+                        were tested, alliances were formed, and sacrifices were made.
+                    </li>
+                    <li>
+                        The war's impact on societies, politics, and global dynamics continues to
+                        resonate today, reminding us of the importance of learning from the past to
+                        shape a better future.
+                    </li>
+                    <li>
+                        As we reflect on the struggles and triumphs of World War II, let us strive
+                        for peace, unity, and the preservation of human rights, honoring the memory
+                        of those who lived through this defining chapter of our history.
+                    </li>
+                </ol>
             </section>
         </section>
     );

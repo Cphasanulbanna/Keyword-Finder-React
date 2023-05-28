@@ -77,3 +77,28 @@ ul {
     background-color: red;
     color: #fff;
 }
+
+.green {
+    color: green;
+}
+
+p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+h3.title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+ol {
+    padding-left: 40px;
+    margin-bottom: 25px;
+}
+
+li {
+    line-height: 1.8em;
+}
