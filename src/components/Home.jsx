@@ -73,35 +73,33 @@ export const Home = () => {
         }
     };
 
-    useEffect(() => {
-        highlightMatchingText();
-    }, [query, currentIndex]);
-
     //close searchbar
     const closeSearchBar = () => {
         setQuery("");
         setViewSearchBar(false);
     };
 
+    const handleKeyPress = (e) => {
+        //opening searchbar
+        if (e.ctrlKey && e.key === "f") {
+            e.preventDefault();
+            setViewSearchBar(true);
+        }
+
+        //left, right navigation using keybord
+        if (viewSearchBar) {
+            if (e.key === "ArrowLeft") {
+                previousText();
+            }
+
+            if (e.key === "ArrowRight") {
+                nextText();
+            }
+        }
+    };
+
     useEffect(() => {
-        const handleKeyPress = (e) => {
-            //opening searchbar
-            if (e.ctrlKey && e.key === "f") {
-                e.preventDefault();
-                setViewSearchBar(true);
-            }
-
-            //left, right navigation using keybord
-            if (viewSearchBar) {
-                if (e.key === "ArrowLeft") {
-                    previousText();
-                }
-
-                if (e.key === "ArrowRight") {
-                    nextText();
-                }
-            }
-        };
+        highlightMatchingText();
         window.addEventListener("keydown", handleKeyPress);
 
         return () => window.removeEventListener("keydown", handleKeyPress);
